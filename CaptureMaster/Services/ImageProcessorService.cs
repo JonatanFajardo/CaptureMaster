@@ -2,20 +2,22 @@
 using System.Drawing.Imaging;
 using System.Text;
 
-namespace CaptureMaster.Helpers
+namespace CaptureMaster.Services
 {
-    public class ImageProcessor
+    public class ImageProcessorService
     {
         public List<ImageProperties> imagesPropertie = new List<ImageProperties>();
         int totalImages;
         int currentImageIndex = 0;
+
+
 
         public async Task GroupCopyImagesByDate(string sourceFolderPath, string destinationFolderPath, ProgressBar progressBar)
         {
             try
             {
                 // Obtener la lista de archivos de imagen en la carpeta de origen
-                string[] imageFiles = GetImageFiles(sourceFolderPath);
+                string[] imageFiles = FileHelper.DirectoryGetFiles(sourceFolderPath);
 
                 // Obtener las propiedades de las imágenes de forma asíncrona
                 List<ImageProperties> images = await Task.Run(() => GetImagePropertiesAsync(imageFiles, destinationFolderPath));
@@ -141,11 +143,6 @@ namespace CaptureMaster.Helpers
 
             // Si no se puede obtener la fecha de la imagen, lanzar una excepción
             throw new Exception("No se puede obtener la fecha de la imagen.");
-        }
-        private string[] GetImageFiles(string sourceFolderPath)
-        {
-            // Obtener todos los archivos de imagen en la carpeta de origen con la extensión "*.jpg"
-            return Directory.GetFiles(sourceFolderPath);
         }
 
         public enum EnumExifTag

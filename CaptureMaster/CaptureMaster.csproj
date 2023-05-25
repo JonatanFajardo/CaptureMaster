@@ -10,6 +10,12 @@
 
   <ItemGroup>
     <Folder Include="Dtos\" />
+    <Folder Include="Feature\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="ExifLib" Version="1.7.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
   </ItemGroup>
 
 </Project>

@@ -1,5 +1,6 @@
 using CaptureMaster.Dtos;
-using CaptureMaster.Helpers;
+using CaptureMaster.Services;
+using System.Diagnostics;
 
 namespace CaptureMaster.Forms
 {
@@ -55,7 +56,7 @@ namespace CaptureMaster.Forms
             dataGridView1.Columns.Add("FechaCaptura", "Fecha de Captura");
             dataGridView1.Columns.Add("Nombre", "Nombre");
 
-            ImageProcessor processor = new ImageProcessor();
+            ImageProcessorService processor = new ImageProcessorService();
             await processor.GroupCopyImagesByDate(sourceFolderPath, destinationFolderPath, progressBar1);
             _imagesPropertie = processor.imagesPropertie;
             dataGridView1.DataSource = _imagesPropertie;
@@ -81,6 +82,40 @@ namespace CaptureMaster.Forms
                 destinationFolderPath = selectedFolderPath;
 
             }
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            // Ruta de la imagen
+            string imagePath = @"C:Users/Jonna/Pictures/Trabajos Soldadura-51xY+k27mhL._AC_SL1500_ - copia.jpg";
+
+            // Ruta de la imagen
+
+            try
+            {
+                // Comando para cambiar etiquetas utilizando ExifTool
+                string exifToolCommand = $"-Keywords='etiqueta1,etiqueta2,etiqueta3' \"{imagePath}\"";
+
+                // Ejecuta ExifTool como proceso externo
+                ProcessStartInfo startInfo = new ProcessStartInfo();
+                startInfo.FileName = "exiftool"; // Asegúrate de tener ExifTool instalado y disponible en el PATH del sistema
+                startInfo.Arguments = exifToolCommand;
+                startInfo.RedirectStandardOutput = true;
+                startInfo.UseShellExecute = false;
+                startInfo.CreateNoWindow = true;
+
+                using (Process process = Process.Start(startInfo))
+                {
+                    process.WaitForExit();
+                    Console.WriteLine("Etiquetas cambiadas correctamente.");
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error al cambiar etiquetas: " + ex.Message);
+            }
+
+
         }
     }
 }

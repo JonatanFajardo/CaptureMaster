@@ -39,6 +39,7 @@ namespace CaptureMaster.Forms
             btnGenerar = new Button();
             dataGridView1 = new DataGridView();
             progressBar1 = new ProgressBar();
+            button2 = new Button();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             SuspendLayout();
             // 
@@ -120,11 +121,22 @@ namespace CaptureMaster.Forms
             progressBar1.Size = new Size(240, 23);
             progressBar1.TabIndex = 8;
             // 
+            // button2
+            // 
+            button2.Location = new Point(256, 150);
+            button2.Name = "button2";
+            button2.Size = new Size(75, 23);
+            button2.TabIndex = 9;
+            button2.Text = "button2";
+            button2.UseVisualStyleBackColor = true;
+            button2.Click += button2_Click;
+            // 
             // Principal
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(590, 500);
+            Controls.Add(button2);
             Controls.Add(progressBar1);
             Controls.Add(dataGridView1);
             Controls.Add(btnGenerar);
@@ -153,5 +165,6 @@ namespace CaptureMaster.Forms
         private Button btnGenerar;
         private DataGridView dataGridView1;
         private ProgressBar progressBar1;
+        private Button button2;
     }
 }
